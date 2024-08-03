@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "369577116365",
+    "project_id": "publishio",
+    "storage_bucket": "publishio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:369577116365:android:f3d3759026f17d3f3b1f84",
+        "android_client_info": {
+          "package_name": "com.mycompany.publishioso"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBePT2Ek2b43Ilk9iqjTHdejAtwzFoVwwc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
