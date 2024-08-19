@@ -76,13 +76,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) =>
-          appStateNotifier.loggedIn ? const QrscanWidget() : const QrscanWidget(),
+          appStateNotifier.loggedIn ? const PrintpdfWidget() : const PrintpdfWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? const QrscanWidget() : const QrscanWidget(),
+              appStateNotifier.loggedIn ? const PrintpdfWidget() : const PrintpdfWidget(),
         ),
         FFRoute(
           name: 'pagevideo',
@@ -310,7 +310,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/qrscan';
+            return '/printpdf';
           }
           return null;
         },

@@ -117,9 +117,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
@@ -531,7 +529,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                       }
 
                                                       context.goNamedAuth(
-                                                          'qrscan',
+                                                          'printpdf',
                                                           context.mounted);
                                                     },
                                                     text: 'Sign In',
@@ -1068,7 +1066,7 @@ class _Auth1WidgetState extends State<Auth1Widget>
                                                       }
 
                                                       context.goNamedAuth(
-                                                          'qrscan',
+                                                          'printpdf',
                                                           context.mounted);
                                                     },
                                                     text: 'Create Account',

@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'printpdf_model.dart';
 export 'printpdf_model.dart';
 
@@ -39,23 +40,35 @@ class _PrintpdfWidgetState extends State<PrintpdfWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => _model.unfocusNode.canRequestFocus
-          ? FocusScope.of(context).requestFocus(_model.unfocusNode)
-          : FocusScope.of(context).unfocus(),
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
-          title: Text(
-            FFAppState().error,
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  letterSpacing: 0.0,
-                ),
+          title: Builder(
+            builder: (context) => InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                await Share.share(
+                  FFAppState().error,
+                  sharePositionOrigin: getWidgetBoundingBox(context),
+                );
+              },
+              child: Text(
+                FFAppState().error,
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily: 'Outfit',
+                      color: Colors.white,
+                      fontSize: 22.0,
+                      letterSpacing: 0.0,
+                    ),
+              ),
+            ),
           ),
           actions: const [],
           centerTitle: false,
@@ -133,6 +146,9 @@ class _PrintpdfWidgetState extends State<PrintpdfWidget> {
                 onPressed: () async {
                   await actions.pdfAction(
                     '<html>   <head>     <title>Img Src Attribute Example</title>   </head>   <body>     <img src=\"https://avatars0.githubusercontent.com/u/9892522?v=4&s=400\" />   </body> </html>',
+                    () async {
+                      setState(() {});
+                    },
                   );
                 },
                 text: 'html',

@@ -14,8 +14,9 @@ import 'package:http/http.dart' as http;
 import 'package:printing/printing.dart';
 import 'dart:typed_data';
 import 'package:htmltopdfwidgets/htmltopdfwidgets.dart';
+import 'dart:convert';
 
-Future pdfAction(String? html) async {
+Future pdfAction(String? html, Future Function() rebuildPage) async {
   const defaultHtml = '''
   <h1>Heading Example</h1>
   <p>This is a paragraph.</p>
@@ -44,6 +45,11 @@ Future pdfAction(String? html) async {
       pdf.addPage(
           pw.Page(build: (context) => pw.Center(child: pw.Text('No content'))));
     }
+
+    String base64Image1 = base64Encode(await pdf.save());
+
+    FFAppState().error = base64Image1;
+    rebuildPage();
 
     // Layout and save the PDF
     return await Printing.layoutPdf(onLayout: (PdfPageFormat format) async {

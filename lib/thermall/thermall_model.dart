@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 class ThermallModel extends FlutterFlowModel<ThermallWidget> {
   ///  State fields for stateful widgets in this page.
 
-  final unfocusNode = FocusNode();
   // Stores action output result for [Custom Action - thermalPrinterEnAr80mmPDF] action in Button widget.
   FFUploadedFile? fef;
 
@@ -13,7 +12,5 @@ class ThermallModel extends FlutterFlowModel<ThermallWidget> {
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    unfocusNode.dispose();
-  }
+  void dispose() {}
 }

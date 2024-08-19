@@ -9,6 +9,12 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'package:googleapis/cloudcontrolspartner/v1.dart';
+
+import 'index.dart'; // Imports other custom actions
+
+import 'package:universal_io/io.dart'; // For cross-platform checks
+import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:http/http.dart' as http;
@@ -35,8 +41,18 @@ Future pdfAction2(String? imageUrl) async {
       },
     ),
   );
+  final bytes = await pdf.save();
+  if (!Platform.isIOS) {
+    await Printing.layoutPdf(
+      onLayout: (PdfPageFormat format) async => bytes,
+    );
+  } else {
+    // Get the path to the documents directory
+    var directory = await getApplicationDocumentsDirectory();
+    final filePath = '${directory.path}/downloaded_pdf.pdf';
 
-  await Printing.layoutPdf(
-    onLayout: (PdfPageFormat format) async => await pdf.save(),
-  );
+    // Save the byte data to a file
+    final file = File(filePath);
+    await file.writeAsBytes(bytes);
+  }
 }
